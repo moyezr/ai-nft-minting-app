@@ -1,0 +1,58 @@
+.logo {
+    background: -webkit-linear-gradient(to right, #ff6f00, #fffb00 );  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ff6f00, #fffb00 ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-position: center center;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: var(--text-shadow);
+    font-size: 3rem;
+    font-weight: 700;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar {
+    display: grid;
+    grid-template-columns: 5fr 2fr 3fr;
+    place-content: center;
+    place-items: center;
+    padding: 0;
+    margin: 0;
+    margin-left: -2rem;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.navbar_link {
+    width: fit-content;
+    cursor: pointer;
+    color: white;
+    filter: var(--text-shadow);
+}
+
+.connect_btn {
+    font-size: 1.5rem;
+    width: fit-content;
+    cursor: pointer;
+    color: white;
+    filter: var(--text-shadow);
+}
+
+@media screen and (max-width: 768px) {
+    .logo {
+        font-size: 2rem;
+        margin: 0;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-around;
+        font-size: 0.8rem;
+        margin: none;
+    }
+
+    .connect_btn {
+        width: fit-content;
+        font-size: 1rem;
+    }
+}
