@@ -103,6 +103,12 @@
     padding: 0 12rem;
 }
 
+.red_text {
+    color: red;
+    filter: drop-shadow(2px 2px 10px white);
+    font-weight: 800;
+}
+
 .user_guide_txt {
     grid-column: span 2;
     font-weight: 600;
@@ -114,7 +120,7 @@
     width: 90%;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     vertical-align: center;
-    margin-top: 5rem;
+    margin-top: 3rem;
 }
 
 .prompt_img {
@@ -125,6 +131,7 @@
     margin: 0 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.8);
     transition: all 0.3s;
+    cursor: pointer;
 }
 
 .prompt_img:hover {
@@ -156,6 +163,7 @@
         margin-top: 1rem;
     }
     .user_guide_txt {
+        margin-top: 1.5rem;
         font-size: 10px;
         font-weight: 600;
     }

@@ -1,19 +1,23 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
-// will compile your contracts, add the Hardhat Runtime Environment's members to the
-// global scope, and execute the script.
+
 const hre = require("hardhat");
 
 async function main() {
+  //Whitelist Contract Factory
   const whitelistContract = await ethers.getContractFactory("Whitelist");
-
-  const deployedWhitelistContract = await whitelistContract(100);
-
+  const deployedWhitelistContract = await whitelistContract.deploy(100);
   await deployedWhitelistContract.deployed();
 
-  console.log(`Whitelist Contract Deployed to --> ${deployedWhitelistContract.address}`)
+  //Deploying the DeDevsCollection 
+  const deDevsContract = await ethers.getContractFactory("DeDevs");
+  const deployedDeDevsContract = await deDevsContract.deploy(deployedWhitelistContract.address);
+
+  await deployedDeDevsContract.deployed()
+
+
+  console.log(`
+  Whitelist Contract Deployed to ${deployedWhitelistContract.address}
+  DeDevs Contract Deployed to ${deployedDeDevsContract.address}
+  `)
 }
 
 // We recommend this pattern to be able to use async/await everywhere

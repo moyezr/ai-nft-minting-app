@@ -32,4 +32,13 @@ contract Whitelist {
         // Increase the number of whitelisted addresses
         numAddressesWhitelisted += 1;
     }
+
+    function isWhitelisted(address _sender) public view returns(bool) {
+        if(whitelistedAddresses[_sender]) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -1,17 +1,16 @@
+require("dotenv").config();
 const { Configuration, OpenAIApi } = require("openai");
 
-
-// org-x2IfWi9SqvhfaBaUfQnSmNJz
-// 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
 export default async function (req, res) {
 
+    const { OPEN_AI_API } = process.env;
 
   const prompt = req.query.prompt;
 
   console.log("Prompt --> ", prompt);
 
     const configuration = new Configuration({
-        apiKey: "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",
+        apiKey: OPEN_AI_API,
       });
       const openai = new OpenAIApi(configuration);
 
@@ -20,19 +19,17 @@ export default async function (req, res) {
         const response = await openai.createImage({
             prompt: prompt,
             n: 4,
-            size: "512x512",
+            size: "256x256",
+            response_format: "b64_json"
           });
         const arr = response.data.data;
 
         
-        const imageURLs = arr.map((el, i) => {
-          console.log(`URL ${i} --> ${el.url}`)
-          return el.url
-        })
+
 
     res.status(200).json({
         success: true,
-        imageURLs: imageURLs
+        imageData: arr
     })
     return ;
       } catch (error) {
