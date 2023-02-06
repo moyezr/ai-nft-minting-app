@@ -1,16 +1,16 @@
 import "../styles/globals.css";
 import Navbar from "../Components/Navbar/Navbar";
-import DeDevsProvider from "../utils/DeDevsContext";
+import AiMintsProvider from "../utils/AiMintsContext";
 
 function MyApp({ Component, pageProps }) {
   return (
     <div className="global-container">
-      <DeDevsProvider>
+      <AiMintsProvider>
         <div className="glass-card">
           <Navbar />
           <Component {...pageProps} />
         </div>
-      </DeDevsProvider>
+      </AiMintsProvider>
     </div>
   );
 }

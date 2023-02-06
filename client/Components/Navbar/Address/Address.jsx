@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useDeDevsContext } from '../../../utils/DeDevsContext'
+import { useAiMintsContext } from '../../../utils/AiMintsContext'
 const Address = ({address, cut}) => {
 
-    const { nftsMinted, numberOfNFTsMinted} = useDeDevsContext();
+    const { nftsMinted, numberOfNFTsMinted} = useAiMintsContext();
 
     useEffect(() => {
       numberOfNFTsMinted();

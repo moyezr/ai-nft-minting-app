@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDeDevsContext } from "../../utils/DeDevsContext";
+import { useAiMintsContext } from "../../utils/AiMintsContext";
 import Link from "next/link"
 import styles from "./Navbar.module.css"
 import Address from "./Address/Address";
@@ -8,7 +8,7 @@ import Address from "./Address/Address";
 const Navbar = () => {
     const [windowWidth, setWindowWidth] = useState("");
 
-    const {currentAddress, connectWallet, walletConnected} = useDeDevsContext();
+    const {currentAddress, connectWallet, walletConnected} = useAiMintsContext();
     useEffect(() => {
       setWindowWidth(window.innerWidth);
     }, [])

@@ -9,17 +9,17 @@ import { uploadFileToIPFS } from "../utils/pinata";
 import cat1 from "../public/cat1.jpg";
 
 import styles from "../styles/Mint.module.css";
-import { useDeDevsContext } from "../utils/DeDevsContext";
+import { useAiMintsContext } from "../utils/AiMintsContext";
 
 const mint = () => {
-  const [image, setImage] = useState(cat1);
+  const [image, setImage] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [btnText, setBtnText] = useState("Mint NFT");
   const [isWhitelisted, setIsWhitelisted] = useState(false)
 
   
   const router = useRouter();
-  const { mintNFT, checkIfWhitelisted, nftsMinted } = useDeDevsContext();
+  const { mintNFT, checkIfWhitelisted, nftsMinted, connectWallet } = useAiMintsContext();
 
   const b64ToFile = (b64String) => {
     const binaryData = atob(b64String);
@@ -55,10 +55,11 @@ const mint = () => {
 
   const id = router.query.imageId;
 
-  // useEffect(() => {
-  //   whitelistCheck();
-  //   createFile();
-  // }, []);
+  useEffect(() => {
+    connectWallet()
+    whitelistCheck();
+    createFile();
+  }, []);
 
   const createFile = () => {
     const b64String = localStorage.getItem(`url${id}`);
