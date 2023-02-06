@@ -1,4 +1,9 @@
 require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();
+
+const { REACT_APP_ALCHEMY_API_URL, PRIVATE_KEY } = process.env;
+
+
 module.exports = {
   defaultNetwork: "hardhat",
   networks: {
@@ -6,8 +11,8 @@ module.exports = {
     //   chainId: 31337
     // },
     goerli: {
-      url: process.env.REACT_APP_ALCHEMY_API_URL,
-      accounts: [ process.env.REACT_APP_PRIVATE_KEY ]
+      url: `${REACT_APP_ALCHEMY_API_URL}`,
+      accounts: [ `${PRIVATE_KEY}` ]
     }
   },
   solidity: {
