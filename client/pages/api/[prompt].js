@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({path: "/.env.local"});
 const { Configuration, OpenAIApi } = require("openai");
 
 export default async function imageGenerator (req, res) {

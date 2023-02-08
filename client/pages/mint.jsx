@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
-import Link from "next/link";
+
 
 import { uploadFileToIPFS } from "../utils/pinata";
 
@@ -73,6 +72,7 @@ const Mint = () => {
       console.log("Uploading metadata to ipfs");
       // console.log("Image file before uploading to IPFS", imageFile)
       let response = await uploadFileToIPFS(imageFile);
+
 
       if (response.success == true) {
         setBtnText("Successfully Uploaded File to IPFS ✅");
