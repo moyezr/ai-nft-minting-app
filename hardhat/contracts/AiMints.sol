@@ -29,7 +29,7 @@ contract AiMints is ERC721URIStorage, Ownable {
     }
 
     function _baseURI() internal view override returns (string memory) {
-        return "http://127.0.0.1:3000/api/tokenURI/";
+        return "https://ai-nft-minting-nwvgendue-moyezrabbaniwork-gmailcom.vercel.app/api/tokenURI/";
     }
 
 
@@ -86,7 +86,7 @@ contract AiMints is ERC721URIStorage, Ownable {
     }
 
     function contractURI() public view returns (string memory) {
-        return "http:127.0.0.1/api/contractURI/contractURI";
+        return "https://ai-nft-minting-nwvgendue-moyezrabbaniwork-gmailcom.vercel.app/api/contractURI/contractURI";
     }
 
 
