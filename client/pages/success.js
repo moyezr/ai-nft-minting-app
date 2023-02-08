@@ -39,7 +39,7 @@ const success = () => {
         <>
           <p className={styles.success_txt}>🎉 Successfully Minted the NFT!</p>
           <p className={styles.opensea_link}>
-            You can view your NFT on <Link href="/">OpenSea</Link>
+            You can view your NFT on <Link target="" href={`https://testnets.opensea.io/assets/0x2c466ba7b3f6fe3340f83a5C5500769F836D5976/${latestId}`}>OpenSea</Link>
           </p>
           <p className={styles.home_link}>
             Go Back to <span onClick={()=> router.push("/")}> Home Page</span>
