@@ -11,7 +11,7 @@
 
 
 /** @type {import('next').NextConfig} */
-const webpack = require('webpack')
+
 
 
 
@@ -25,8 +25,5 @@ module.exports = {...nextConfig,
 images: {
   domains: ['gateway.pinata.cloud',"oaidalleapiprodscus.blob.core.windows.net", "localhost"],
 },
-webpack(config) {
-  config.plugins.push(new webpack.EnvironmentPlugin(myEnv))
-  return config
-}
+
 }
