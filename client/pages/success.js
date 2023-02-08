@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useAiMintsContext } from "../utils/AiMintsContext";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-const Sucess = () => {
+const Success = () => {
   const [latestId, setLatestId] = useState("");
   const { fetchTokenURI, getLatestTokenId } = useAiMintsContext();
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useAiMintsContext } from '../../../utils/AiMintsContext'
+import { useAiMintsContext } from '../../utils/AiMintsContext'
 const Address = ({address, cut}) => {
 
     const { nftsMinted, numberOfNFTsMinted} = useAiMintsContext();

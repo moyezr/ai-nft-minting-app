@@ -5,7 +5,6 @@ import { lazy, useState } from "react";
 import axios from "axios";
 import ai from "../public/ai.png"
 import {useRouter} from "next/router"
-import Address from "../Components/Navbar/Address/Address";
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false)

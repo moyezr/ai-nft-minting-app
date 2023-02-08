@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useAiMintsContext } from "../../utils/AiMintsContext";
 import Link from "next/link"
 import styles from "./Navbar.module.css"
-import Address from "./Address/Address";
-
+import Address from "../Address/Address";
 
 const Navbar = () => {
     const [windowWidth, setWindowWidth] = useState("");
