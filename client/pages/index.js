@@ -69,13 +69,6 @@ export default function Home() {
 
   return (
     <div>
-      <Head>
-      <meta charSet="UTF-8" />
-      <meta name="description" content="An Ai NFT Minting website that mints nft after generating images from the start." />
-      <meta name="keywords" content="Ai, NFT, Web3, App" />
-      <meta name="author" content="John Doe" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
       <main className={styles.main}>
       
       <div className={styles.promptBar_container}>
