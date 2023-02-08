@@ -16,7 +16,7 @@ body {
   background-repeat: no-repeat;
   color: black;
   font-family: 'Courier New', Courier, monospace;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 a {
