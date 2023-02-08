@@ -1,7 +1,7 @@
 import aiMints from "./AiMints.json";
 import whitelist from "./Whitelist.json";
-const AiMintsContractAddress = "0x2c466ba7b3f6fe3340f83a5C5500769F836D5976";
-const WhitelistContractAddress = "0x9A99a9dD8Ace331B0621c29621892E1C716f70A1";
+const AiMintsContractAddress = "0xA98b8f1815EB30F186831F27a1Fcd412BDb7Ba44";
+const WhitelistContractAddress = "0x3B7Ee0bA28D19be10D728E7Cb475B1FbAA2a25bb";
 const AiMintsContractAbi = aiMints.abi;
 const WhitelistContractAbi =  whitelist.abi;
 

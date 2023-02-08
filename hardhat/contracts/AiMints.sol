@@ -85,6 +85,10 @@ contract AiMints is ERC721URIStorage, Ownable {
         return latestId;
     }
 
+    function contractURI() public view returns (string memory) {
+        return "http:127.0.0.1/api/contractURI/contractURI";
+    }
+
 
           // Function to receive Ether. msg.data must be empty
     receive() external payable {}
