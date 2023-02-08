@@ -4,10 +4,6 @@ import styles from "../styles/Home.module.css";
 import { lazy, useState } from "react";
 import axios from "axios";
 import ai from "../public/ai.png"
-import cat1 from "../public/cat1.jpg";
-import cat2 from "../public/cat2.jpg";
-import cat3 from "../public/cat3.jpg";
-import cat4 from "../public/cat4.jpg";
 import {useRouter} from "next/router"
 import Address from "../Components/Navbar/Address/Address";
 export default function Home() {

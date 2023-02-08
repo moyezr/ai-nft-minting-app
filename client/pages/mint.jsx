@@ -6,7 +6,6 @@ import Link from "next/link";
 
 import { uploadFileToIPFS } from "../utils/pinata";
 
-import cat1 from "../public/cat1.jpg";
 
 import styles from "../styles/Mint.module.css";
 import { useAiMintsContext } from "../utils/AiMintsContext";
@@ -79,23 +78,25 @@ const mint = () => {
         setBtnText("Successfully Uploaded File to IPFS ✅");
         const tokenURI = response.pinataURL;
         console.log("TOKen URI -->", tokenURI)
-        setBtnText("Minting NFT...");
+        // setBtnText("Minting NFT...");
         if(isWhitelisted){
-          await mintNFT(tokenURI, true);
+          await mintNFT(tokenURI, true, setBtnText);
         } else {
-          await mintNFT(tokenURI, false);
+          await mintNFT(tokenURI, false, setBtnText);
         }
+        console.log("Minted NFT")
         setBtnText("Mint NFT");
         e.target.disabled = false;
-        router.push("/");
+  
       } else {
         alert("Failed to Upload File to IPFS");
         e.target.disabled = false;
         setBtnText("Mint NFT");
       }
     } catch (error) {
+      alert("Error Minting NFT")
       e.target.disabled = false;
-      console.log("Error uploading image to IPFS", error);
+      console.log("Error Minting NFT", error);
     }
   };
 
@@ -123,9 +124,7 @@ const mint = () => {
             </p>
             <button
               className={styles.mint_btn}
-              onClick={(e) => {
-                mintHandler(e);
-              }}
+              onClick={mintHandler}
             >
               {btnText}
             </button>

@@ -2,6 +2,7 @@ import { useEffect, useContext, useState } from "react";
 import { AiMintsContractAbi, AiMintsContractAddress, WhitelistContractAbi, WhitelistContractAddress } from "./constants";
 import { ethers } from "ethers";
 import React from 'react'
+import {useRouter} from "next/router";
 
 const AiMintsContext = React.createContext();
 
@@ -10,6 +11,8 @@ const [currentAddress, setCurrentAddress] = useState("")
   const [walletConnected, setWalletConnected] = useState(false);
   const [totalWhitelisted, setTotalWhitelisted] = useState(0);
   const [nftsMinted, setNftsMinted] = useState(0);
+
+  const router = useRouter();
 
 
   const getProviderOrSigner = async (needSigner = false) => {
@@ -51,8 +54,10 @@ const [currentAddress, setCurrentAddress] = useState("")
     return instance
   }
 
-  const getWhitelisted = async () => {
+  const getWhitelisted = async (setWhitelistTxt) => {
     try {
+
+      setWhitelistTxt("Whitelisting...");
       const signer = await getProviderOrSigner(true);
 
 
@@ -62,9 +67,12 @@ const [currentAddress, setCurrentAddress] = useState("")
       
       console.log("WHite list Contract ",whitelistContract )
 
+      
+
       const txn = await whitelistContract.addAddressToWhitelist();
       await txn.wait();
 
+      setWhitelistTxt("🎉 Whitelisted");
       await getTotalWhitelisted();
 
 
@@ -94,12 +102,12 @@ const [currentAddress, setCurrentAddress] = useState("")
 
   const checkIfWhitelisted = async () => {
     try {
-      const provider = await getProviderOrSigner();
-      const whitelistContract = await getContractInstance(WhitelistContractAddress, WhitelistContractAbi, provider)
+      const signer = await getProviderOrSigner(true);
+      const whitelistContract = await getContractInstance(WhitelistContractAddress, WhitelistContractAbi, signer)
 
-
-      console.log("WHitelist Contract", whitelistContract)
-      const txn = await whitelistContract.isWhitelisted(currentAddress);
+      const address = await signer.getAddress();
+      console.log("WHitelist Contract", whitelistContract);
+      const txn = await whitelistContract.isWhitelisted(address);
 
       console.log("txn -->", txn)
 
@@ -109,27 +117,29 @@ const [currentAddress, setCurrentAddress] = useState("")
     }
   }
 
-  const mintNFT = async (tokenURI, isWhitelisted) => {
+  const mintNFT = async (tokenURI, isWhitelisted, setBtnText) => {
     try {
       const signer = await getProviderOrSigner(true);
       const aiMintsContract = await getContractInstance(AiMintsContractAddress, AiMintsContractAbi, signer);
-      
-      await checkIfWhitelisted();
+      console.log("aiMintsContract", aiMintsContract);
+
+      setBtnText("Minting NFT");
 
       if(isWhitelisted) {
-        const txn = await aiMintsContract.whitelistMint(tokenURI, {value: ethers.utils.parseUnits("0.2", "ether")});
+        let txn = await aiMintsContract.whitelistMint(tokenURI, {value: ethers.utils.parseUnits("0.01", "ether")});
         await txn.wait();
         alert("Successfully Minted the NFT")
       } else {
-        if(isWhitelisted) {
-          const txn = await aiMintsContract.publicMint(tokenURI, {value: ethers.utils.parseUnits("0.1", "ether")});
+          let txn = await aiMintsContract.publicMint(tokenURI, {value: ethers.utils.parseUnits("0.02", "ether")});
           await txn.wait();
         alert("Successfully Minted the NFT")
-
         }
-      }
+
+        router.push({ pathname: "success", query:{isError : "false"} });
     } catch (error) {
       alert("Failed to Mint NFT");
+      router.push({ pathname: "success", query:{isError : "true"} });
+
       console.log("Error Minting NFT", error);
     }
   }
@@ -139,7 +149,10 @@ const [currentAddress, setCurrentAddress] = useState("")
       const provider = await getProviderOrSigner(false);
       const aiMintsContract = await getContractInstance(AiMintsContractAddress, AiMintsContractAbi, provider);
 
+      console.log("tokenId before fetching tokenURI ", tokenId)
+
       const tokenURI = await aiMintsContract.tokenURI(tokenId);
+      console.log("TOKEN URI --> ", tokenURI)
 
       return tokenURI;
     } catch (error) {
@@ -149,15 +162,36 @@ const [currentAddress, setCurrentAddress] = useState("")
 
   const numberOfNFTsMinted = async() => {
     try {
-      const provider = await getProviderOrSigner(false);
-      const aiMintsContract = await getContractInstance(AiMintsContractAddress, AiMintsContractAbi, provider);
+      const signer = await getProviderOrSigner(true);
+      const aiMintsContract = await getContractInstance(AiMintsContractAddress, AiMintsContractAbi, signer);
       
-      const no = await aiMintsContract.getNumberOfNFTsMinted();
+      const address = await signer.getAddress();
+      const no = await aiMintsContract.getNumberOfNFTsMinted(address);
+
+      console.log("address --> ", address);
 
       console.log("number of NFTs minted --> ", no);
       setNftsMinted(no);
     } catch (error) {
       console.log("Error fetching the number of NFTs Minted", error);
+    }
+  }
+
+  const getLatestTokenId = async (setLatestId) => {
+    try {
+      const provider = await getProviderOrSigner(false);
+
+      const aiMintsContract = await getContractInstance(AiMintsContractAddress, AiMintsContractAbi, provider);
+
+      let latestId = await aiMintsContract.latestTokenId();
+      latestId = latestId.toString();
+
+      setLatestId(latestId);
+      console.log("latest token Id -->", latestId);
+
+      return latestId;
+    } catch (error) {
+      console.log("Error fetching latest token Id ", error);
     }
   }
  
@@ -173,7 +207,9 @@ const [currentAddress, setCurrentAddress] = useState("")
         checkIfWhitelisted,
         mintNFT,
         numberOfNFTsMinted,
-        nftsMinted
+        nftsMinted,
+        fetchTokenURI,
+        getLatestTokenId
        }
     }>{children}</AiMintsContext.Provider>
   )

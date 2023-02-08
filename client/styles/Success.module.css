@@ -32,6 +32,12 @@
     filter: var(--text-shadow);
 }
 
+.red_txt {
+    color: red;
+    filter: drop-shadow(2px 2px 10px white);
+    font-weight: 800;
+}
+
 @media screen and (max-width: 768px) {
 
     .success_container {

@@ -15,7 +15,6 @@ contract AiMints is ERC721URIStorage, Ownable {
 
     mapping(address => uint8) public nftsMinted;
 
-    string public _baseTokenURI;
     Whitelist whitelist;
 
     modifier onlyWhenNotPaused {
@@ -23,17 +22,21 @@ contract AiMints is ERC721URIStorage, Ownable {
         _;
     }
 
-    constructor(address whitelistContract) ERC721("De Devs", "DD") {
+    constructor(address whitelistContract) ERC721("AI Mints", "AIM") {
 
         whitelist = Whitelist(whitelistContract);
 
+    }
+
+    function _baseURI() internal view override returns (string memory) {
+        return "http://127.0.0.1:3000/api/tokenURI/";
     }
 
 
     function whitelistMint(string memory tokenURI) public payable onlyWhenNotPaused {
         require(nftsMinted[msg.sender] < 3, "Max limit reached");
         require(whitelist.isWhitelisted(msg.sender), " You are not whitelisted");
-        require(msg.value >= 0.1 ether, "Ether sent is not correct");
+        require(msg.value >= 0.01 ether, "Ether sent is not correct");
         
         _tokenIds.increment();
         uint8 no = nftsMinted[msg.sender];
@@ -48,7 +51,7 @@ contract AiMints is ERC721URIStorage, Ownable {
 
     function publicMint(string memory tokenURI) public payable onlyWhenNotPaused {
         require(nftsMinted[msg.sender] < 3, "Max limit reached");
-        require(msg.value >= 0.2 ether, "Ether sent is not correct");
+        require(msg.value >= 0.02 ether, "Ether sent is not correct");
         _tokenIds.increment();
         uint8 no = nftsMinted[msg.sender];
         no += 1;
@@ -71,9 +74,15 @@ contract AiMints is ERC721URIStorage, Ownable {
         require(sent, "Failed to sent Ether");
     }
 
-    function getNumberOfNFTsMinted() public view returns(uint8) {
-        uint8 no = nftsMinted[msg.sender];
+    function getNumberOfNFTsMinted(address _sender) public view returns(uint8) {
+        uint8 no = nftsMinted[_sender];
         return no;
+    }
+
+    // returns the latest minted tokenId 
+    function latestTokenId() public view returns(uint) {
+        uint latestId = _tokenIds.current();
+        return latestId;
     }
 
 

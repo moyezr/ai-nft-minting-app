@@ -7,16 +7,16 @@ async function main() {
   const deployedWhitelistContract = await whitelistContract.deploy(100);
   await deployedWhitelistContract.deployed();
 
-  //Deploying the DeDevsCollection 
-  const deDevsContract = await ethers.getContractFactory("DeDevs");
-  const deployedDeDevsContract = await deDevsContract.deploy(deployedWhitelistContract.address);
+  //Deploying the AiMintsCollection 
+  const aiMintsContract = await ethers.getContractFactory("AiMints");
+  const deployedAiMintsContract = await aiMintsContract.deploy(deployedWhitelistContract.address);
 
-  await deployedDeDevsContract.deployed()
+  await deployedAiMintsContract.deployed()
 
 
   console.log(`
   Whitelist Contract Deployed to ${deployedWhitelistContract.address}
-  DeDevs Contract Deployed to ${deployedDeDevsContract.address}
+  AiMints Contract Deployed to ${deployedAiMintsContract.address}
   `)
 }
 
