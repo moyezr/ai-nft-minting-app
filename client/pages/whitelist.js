@@ -1,7 +1,7 @@
 import styles from "../styles/Whitelist.module.css"
 import { useEffect, useState } from "react";
 import { useAiMintsContext } from "../utils/AiMintsContext"
-const whitelist = () => {
+const Whitelist = () => {
 
   const { totalWhitelisted, getWhitelisted, getTotalWhitelisted, checkIfWhitelisted } = useAiMintsContext();
   const [isWhitelisted, setisWhitelisted] = useState(false);
@@ -32,4 +32,4 @@ const whitelist = () => {
   )
 }
 
-export default whitelist
+export default Whitelist

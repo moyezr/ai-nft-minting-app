@@ -10,7 +10,7 @@ import { uploadFileToIPFS } from "../utils/pinata";
 import styles from "../styles/Mint.module.css";
 import { useAiMintsContext } from "../utils/AiMintsContext";
 
-const mint = () => {
+const Mint = () => {
   const [image, setImage] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [btnText, setBtnText] = useState("Mint NFT");
@@ -135,4 +135,4 @@ const mint = () => {
   );
 };
 
-export default mint;
+export default Mint;

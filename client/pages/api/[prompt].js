@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { Configuration, OpenAIApi } = require("openai");
 
-export default async function (req, res) {
+export default async function imageGenerator (req, res) {
 
     const { OPEN_AI_API } = process.env;
 

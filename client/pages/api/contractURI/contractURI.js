@@ -1,4 +1,4 @@
-export default async function(req, res) {
+export default async function contractURIFetcher(req, res) {
 
 
     res.status(200).json({

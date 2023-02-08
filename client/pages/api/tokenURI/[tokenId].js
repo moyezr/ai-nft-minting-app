@@ -1,4 +1,4 @@
-export default async function (req, res) {
+export default async function tokenURIFetcher (req, res) {
     
     const ipfsHash = req.query.tokenId.replace(".json", "");
 
