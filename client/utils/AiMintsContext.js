@@ -16,20 +16,25 @@ const [currentAddress, setCurrentAddress] = useState("")
 
 
   const getProviderOrSigner = async (needSigner = false) => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    try {
+         const provider = new ethers.providers.Web3Provider(window.ethereum);
 
     const chainId = await provider.send("eth_chainId", []);
     console.log(chainId);
-    // if (chainId != "0x7a69") {
-    //   window.alert("Please connect to the localhost");
-    //   throw new Error("Please Switch to the localhost");
-    // }
+    if (chainId != "0x5") {
+      window.alert("Please connect to the Goerli Testnet");
+      throw new Error("Please Switch to the localhost");
+    }
 
     if (needSigner) {
       const signer = provider.getSigner();
       return signer;
     }
     return provider;
+    } catch (error) {
+      console.log("Error getting provider/signer", error )
+    }
+ 
   };
 
 
