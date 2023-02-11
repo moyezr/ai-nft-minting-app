@@ -14,6 +14,12 @@ const [currentAddress, setCurrentAddress] = useState("")
 
   const router = useRouter();
 
+  useEffect(() => {
+    if(!(window.ethereum)) {
+      alert("Please Install Metamask");
+    }
+  }, [])
+
 
   const getProviderOrSigner = async (needSigner = false) => {
     try {
